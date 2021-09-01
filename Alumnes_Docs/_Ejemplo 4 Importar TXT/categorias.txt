@@ -1,0 +1,11 @@
+id;Categoría
+1;Frontal Izquierda
+2;Frontal Derecha
+3;Lateral Derecha
+4;Trasera Izquierda
+5;Lateral Izquierda
+6;Trasera Derecha
+7;Frontal Superior
+8;Trasera Superior
+9;Trasera Inferior
+10;Frontal Inferior

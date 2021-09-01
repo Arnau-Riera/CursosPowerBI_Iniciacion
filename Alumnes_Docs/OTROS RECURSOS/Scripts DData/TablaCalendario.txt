@@ -1,0 +1,30 @@
+DimFechas = 
+
+var Fecha = CALENDAR(DATE(2019,1,1),DATE(2019,12,31))
+return
+SELECTCOLUMNS(Fecha,"Fecha",[Date],
+"IdFecha",YEAR([Date])*10000+MONTH([Date])*100 + DAY([Date]),
+"IdFechaEntero",INT([Date]),"Ejercicio" , YEAR([Date]),
+"Mes", UPPER(FORMAT([Date],"MMMM")),
+"MesNro",INT(FORMAT([Date],"M")),"NroDia",INT(FORMAT([Date],"d")),
+"Trimestre","T"&ROUNDUP(MONTH([Date])/3,0),
+"NroTrimestre",ROUNDUP(MONTH([Date])/3,0),
+"DiaSemana",WEEKDAY([Date],2),"Semana",WEEKNUM([Date],2),
+"Nombre Dia",UPPER(FORMAT([Date],"DDDD")),
+"EjercicioTrimestre",COMBINEVALUES("-",YEAR([Date]),"T"&ROUNDUP(MONTH([Date])/3,0)),
+"Num Semana ISO",ROUNDDOWN(([Date]-DATE(year([Date]-WEEKDAY([Date]-1)+4),1,3)+WEEKDAY(DATE(YEAR([Date]-WEEKDAY([Date]-1)+4),1,3))+5)/7,0),
+"MesCorto",UPPER(FORMAT([Date],"MMM")),
+"DiaEjercicio",UPPER(FORMAT([Date],"Y")),
+"EjercicioActual",YEAR(TODAY()),
+"Mes Actual",MONTH(TODAY()),"HoyEntero",INT(today()),
+"Trimestre Actual",ROUNDUP(MONTH(TODAY())/3,0),
+"Semestre",ROUNDUP(INT(FORMAT([Date],"M"))*2/12,0),
+"EjercicioMes",COMBINEVALUES("-",Year([Date]),FORMAT([Date],"MM")),
+"EjercicioISO" , IF(OR((ROUNDDOWN(([Date]-DATE(year([Date]-WEEKDAY([Date]-1)+4),1,3)+WEEKDAY(DATE(YEAR([Date]-WEEKDAY([Date]-1)+4),1,3))+5)/7,0))=53, (ROUNDDOWN(([Date]-DATE(year([Date]-WEEKDAY([Date]-1)+4),1,3)+WEEKDAY(DATE(YEAR([Date]-WEEKDAY([Date]-1)+4),1,3))+5)/7,0))=52)&&MONTH([Date])=1,YEAR([Date])-1,IF((ROUNDDOWN(([Date]-DATE(year([Date]-WEEKDAY([Date]-1)+4),1,3)+WEEKDAY(DATE(YEAR([Date]-WEEKDAY([Date]-1)+4),1,3))+5)/7,0))=1&&MONTH([Date])=12,YEAR([Date])+1,YEAR([Date]))),
+"Desvio Ejercicio" , YEAR([Date])-YEAR(TODAY()),
+"Desvio Mes" , IF((YEAR([Date])-YEAR(TODAY()))=0,INT(FORMAT([Date],"M"))-INT(FORMAT(TODAY(),"M")),INT(FORMAT([Date],"M"))-INT(FORMAT(TODAY(),"M"))+(12*(YEAR([Date])-YEAR(TODAY())))),
+"Desvio Dia" , INT([Date])-INT(Today()),
+"HastaFecha" , IF((INT([Date])-INT(Today()))<=0,"PASADO","FUTURO"),
+"Desvio Trimestre" , IF((YEAR([Date])-YEAR(TODAY()))=0,(ROUNDUP(MONTH([Date])/3,0))-(ROUNDUP(MONTH(TODAY())/3,0)),(ROUNDUP(MONTH([Date])/3,0))-(ROUNDUP(MONTH(TODAY())/3,0))+(4*(YEAR([Date])-YEAR(TODAY())))),
+"Semestre Actual" , ROUNDUP(MONTH(TODAY())*2/12,0),
+"Desvio Semestre" , IF(YEAR([Date])-YEAR(TODAY())=0,(ROUNDUP(INT(FORMAT([Date],"M"))*2/12,0))-(ROUNDUP(MONTH(TODAY())*2/12,0)),(ROUNDUP(INT(FORMAT([Date],"M"))*2/12,0))-(ROUNDUP(MONTH(TODAY())*2/12,0))+(2*(YEAR([Date])-YEAR(TODAY())))))

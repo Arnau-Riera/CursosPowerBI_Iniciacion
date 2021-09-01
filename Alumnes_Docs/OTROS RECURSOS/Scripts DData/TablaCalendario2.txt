@@ -1,0 +1,37 @@
+Fechas = GENERATE (
+CALENDAR( DATE( 2019, 1, 1 ), DATE( 2019, 12, 31 )),
+VAR startOfWeek = 2 // Para que el Lunes sea el primer día de la semana
+VAR currentDay = [Date]
+VAR days = DAY( currentDay )
+VAR months = MONTH ( currentDay )
+VAR years = YEAR ( currentDay )
+VAR nowYear = YEAR( TODAY() )
+VAR nowMonth = MONTH( TODAY() )
+VAR dayIndex = DATEDIFF( currentDay, TODAY(), DAY) * -1
+VAR todayNum = WEEKDAY( TODAY() )
+VAR weekIndex = INT( ROUNDDOWN( ( dayIndex + -1 * IF( todayNum + startOfWeek <= 6, todayNum + startOfWeek, todayNum + startOfWeek – 7 )) / 7, 0 ) )
+RETURN ROW (
+“Año”, years,
+“Mes”, months,
+“Día”, days,
+“Día Index”, dayIndex,
+“Semana Index”, weekIndex,
+“Semana Día”, WEEKDAY(currentDay,2),
+“Semana Nombre”, SWITCH(WEEKDAY(currentDay,2),1,”Lunes”,2,”Martes”,3,”Miercoles”,4,”Jueves”,5,”Viernes”,6,”Sábado”,”Domingo”),
+“Quincena”, IF(days<=15,1, 2),
+“Quincena Nombre”, IF(days<=15,”1ra Quincena”, “2da Quincena”),
+“Mes Index”, INT( (years – nowYear ) * 12 + months – nowMonth ),
+“Año Index”, INT( years – nowYear ),
+“Año Mes”, INT(years*100)+months,
+“Semestre”,IF(months<=6,1, 2),
+“Semestre Nombre”,IF(months<=6,”1er Semestre”, “2do Semestre”),
+“Trimestre”, IF(months<=3,1, IF(months<=6,2,if(months<=9,3,4))),
+“Trimestre Nombre”, IF(months<=3,”1er Trimestre”, IF(months<=6,”2do Trimestre”,if(months<=9,”3er Trimestre”,”4to Trimestre”))),
+“Bimestre”, IF(months<=2,1, IF(months<=4,2,if(months<=6,3,if(months<=8,4,if(months<=10,5,6))))),
+“Bimestre Nombre”, IF(months<=2,”ENE-FEB”, IF(months<=4,”MAR-ABR”,if(months<=6,”MAY-JUN”,if(months<=8,”JUL-AGO”,if(months<=10,”SEP-OCT”,”NOV-DIC”))))),
+“Cuatrimestre”, IF(months<=4,1, IF(months<=8,2,3)),
+“Cuatrimestre Nombre”, IF(months<=4,”1er Cuatrimestre”, IF(months<=8,”2do Cuatrimestre”,”3er Cuatrimestre”)),
+“Mes Ingles”, SWITCH(months,1,”January”,2,”February”,3,”March”,4,”April”,5,”May”,6,”June”,7,”July”,8,”August”,9,”September”,10,”October”,11,”November”,12,”December”,”Invalid Month Number”),
+“Mes Español”, SWITCH(months,1,”Enero”,2,”Febrero”,3,”Marzo”,4,”Abril”,5,”Mayo”,6,”Junio”,7,”Julio”,8,”Agosto”,9,”Septiembre”,10,”Octobre”,11,”Noviembre”,12,”Diciembre”,”Mes Invalido”)
+)
+)
