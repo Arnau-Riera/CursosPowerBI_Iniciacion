@@ -1,0 +1,3 @@
+Un grafico de columnas apiladas que muestre por cada provincia la distribución de sueldos según el tipo de ocupación de los empleados.
+
+Matriz que muestre por cada ciudad y cada ocupación la edad media de mis empleados.
