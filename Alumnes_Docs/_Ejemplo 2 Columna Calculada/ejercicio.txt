@@ -1,3 +1,0 @@
-Grafico circular donde ver por cada categoría el nº de unidades vendidas.
-Al marcar en una de ellas que muestre que proveedores traen productos de esa categoría y el numero de unidades.
-Al marcar en un proveedor que muestre los productos que aporta y las unidades de cada uno.
