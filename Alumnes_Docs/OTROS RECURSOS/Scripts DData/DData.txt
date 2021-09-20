@@ -1,0 +1,13 @@
+DData = 
+
+var Data = CALENDAR("01/01/2019","31/12/2020")
+return
+SELECTCOLUMNS(Data,"Data",[Date],
+"IdData",YEAR([Date])*10000+MONTH([Date])*100 + DAY([Date]),
+"Semana",WEEKNUM([Date],2),
+"MesCurt",UPPER(FORMAT([Date],"MMM")),
+"MesNro",INT(FORMAT([Date],"M")),
+"AnyMes",COMBINEVALUES("-",Year([Date]),FORMAT([Date],"MM")),
+"Trimestre","T"&ROUNDUP(MONTH([Date])/3,0),
+"AnyTrimestre",COMBINEVALUES("-",YEAR([Date]),"T"&ROUNDUP(MONTH([Date])/3,0)),
+"Any" , YEAR([Date]))
